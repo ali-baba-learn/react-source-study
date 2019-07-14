@@ -9,7 +9,7 @@ react@16.5.2 + webpack@4.35.3
 
 
 ```
-git clone --depth 1 https://github.com/ali-baba-learn/react-source-study.git  
+git clone https://github.com/ali-baba-learn/react-source-study.git  
 
 cd react-source-study 
 
