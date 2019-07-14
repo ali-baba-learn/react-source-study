@@ -1,17 +1,13 @@
 {
   "presets": [
-    [
-      "@babel/preset-env",
-      {
-        "targets": {
-          "browsers": ["Chrome >=59"]
-        },
-        "modules": false,
-        "loose": true
-      }
-    ],
-    "@babel/react",
+    "env",
+    "react",
+    "stage-0"
   ],
-  "plugins": ["transform-runtime", "transform-flow-strip-types"],
-  "comments": false
+  "plugins": [
+    "transform-class-properties",
+    "transform-decorators",
+    "transform-react-constant-elements",
+    "transform-react-inline-elements"
+  ]
 }
