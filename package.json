@@ -8,7 +8,7 @@
     "dev": "webpack-dev-server --config ./webpack.config.js",
     "build": "webpack --config ./webpack.config.js"
   },
-  "author": "",
+  "author": "wangyuanchao",
   "license": "ISC",
   "description": "",
   "devDependencies": {
