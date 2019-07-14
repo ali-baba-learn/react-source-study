@@ -1,0 +1,17 @@
+{
+  "presets": [
+    [
+      "@babel/preset-env",
+      {
+        "targets": {
+          "browsers": ["Chrome >=59"]
+        },
+        "modules": false,
+        "loose": true
+      }
+    ],
+    "@babel/react",
+  ],
+  "plugins": ["transform-runtime", "transform-flow-strip-types"],
+  "comments": false
+}
