@@ -18,14 +18,16 @@ npm install || yarn  install
 npm run dev
 
 
-
+```
 构建命令
 ```
+
 npm run build (打包，部署)
 
 ```
 
 本项目参考博主的分享，在此基础上略加了修改
+
 ```
 https://segmentfault.com/a/1190000015908833
 
