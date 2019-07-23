@@ -1,6 +1,6 @@
 import './index.less';
 import React, {Component} from '@packages/react';
-import ReactDOM from '@packages/react-dom/index.js';
+import ReactDOM from '@packages/react-dom';
 
 class Hello extends Component{
   constructor(){

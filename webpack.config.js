@@ -1,76 +1,91 @@
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const path = require('path');
-const webpack = require('webpack');
-const os = require('os');
-const HappyPack = require('happypack');
+const HtmlWebpackPlugin = require("html-webpack-plugin");
+const path = require("path");
+const webpack = require("webpack");
+const os = require("os");
+const HappyPack = require("happypack");
 const happyThreadPool = HappyPack.ThreadPool({ size: os.cpus().length });
 module.exports = {
-  mode: 'development',
-  entry: './src/index.js',
+  mode: "development",
+  entry: "./src/index.js",
   output: {
-    path: __dirname + '/dist',
-    filename: 'index_bundle.js'
+    path: __dirname + "/dist",
+    filename: "index_bundle.js"
   },
   module: {
-    rules: [{
+    rules: [
+      {
         test: /\.css$/,
         use: {
-          loader: 'happypack/loader?id=happyLess',
+          loader: "happypack/loader?id=happyLess"
         }
       },
       {
         test: /\.less$/,
         use: {
-          loader: 'happypack/loader?id=happyLess',
+          loader: "happypack/loader?id=happyLess"
         }
       },
       {
         test: /\.js$/,
         use: {
-          loader: 'happypack/loader?id=happyBabel',
+          loader: "happypack/loader?id=happyBabel"
+        }
+      },
+      {
+        test: /\.(js|jsx)$/,
+        loader: "babel-loader",
+        exclude: /node_modules/,
+        options: {
+          presets: ["@babel/preset-react"],
+          plugins: [
+            "@babel/plugin-transform-flow-strip-types",
+            "@babel/plugin-proposal-class-properties"
+          ]
         }
       }
     ]
   },
   plugins: [
-    
     new HtmlWebpackPlugin({
-      template: './tpl.html'
-    }), new webpack.HotModuleReplacementPlugin(),
+      template: "./tpl.html"
+    }),
+    new webpack.HotModuleReplacementPlugin(),
     new webpack.DefinePlugin({
       __DEV__: true,
-      NODE_ENV:JSON.stringify("development"),
+      NODE_ENV: JSON.stringify("development"),
       spyOnDev: false,
       spyOnDevAndProd: false,
       spyOnProd: false,
-      __PROFILE__: true,
-    }),
-    new HappyPack({
-        //用id来标识 happypack处理那里类文件
-      id: 'happyBabel',
-      //如何处理  用法和loader 的配置一样
-      loaders: [{
-        loader: 'babel-loader?cacheDirectory=true',
-      }],
-      //共享进程池
-      threadPool: happyThreadPool,
-      //允许 HappyPack 输出日志
-      verbose: true,
+      __PROFILE__: true
     }),
     new HappyPack({
       //用id来标识 happypack处理那里类文件
-      id: 'happyLess',
+      id: "happyBabel",
       //如何处理  用法和loader 的配置一样
-      loaders: ['style-loader','css-loader','less-loader'],
+      loaders: [
+        {
+          loader: "babel-loader?cacheDirectory=true"
+        }
+      ],
       //共享进程池
       threadPool: happyThreadPool,
       //允许 HappyPack 输出日志
-      verbose: true,
+      verbose: true
     }),
+    new HappyPack({
+      //用id来标识 happypack处理那里类文件
+      id: "happyLess",
+      //如何处理  用法和loader 的配置一样
+      loaders: ["style-loader", "css-loader", "less-loader"],
+      //共享进程池
+      threadPool: happyThreadPool,
+      //允许 HappyPack 输出日志
+      verbose: true
+    })
   ],
   devtool: "inline-source-map", // enum
   devServer: {
-    contentBase: path.join(__dirname, 'src'),
+    contentBase: path.join(__dirname, "src"),
     port: 9000,
     hot: true,
     overlay: true
@@ -78,11 +93,11 @@ module.exports = {
   resolve: {
     modules: [
       "node_modules",
-      path.resolve(__dirname, "./packages"),
-      path.resolve(__dirname, "./packages/shared")
+      path.resolve(__dirname, "./src/packages"),
+      path.resolve(__dirname, "./src/packages/shared")
     ],
     alias: {
-      '@packages': path.resolve(__dirname, './packages/'),
+      "@packages": path.resolve(__dirname, "./src/packages/")
     }
   }
 };

@@ -9,7 +9,7 @@
 
 /* eslint-disable react-internal/warning-and-invariant-args */
 
-// import invariant from 'shared/invariant';
+import invariant from 'shared/invariant';
 
 // We expect that our Rollup, Jest, and Flow configurations
 // always shim this module with the corresponding host config
@@ -20,5 +20,5 @@
 // the failure isn't silent.
 
 // invariant(false, 'This module must be shimmed by a specific renderer.');
-
 export * from './forks/ReactFiberHostConfig.dom';
+
